@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InventoryPro - Professional Inventory Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-boxes"></i>
+                <span>InventoryPro</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#products" class="nav-link" data-page="products">
+                        <i class="fas fa-box"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#locations" class="nav-link" data-page="locations">
+                        <i class="fas fa-warehouse"></i>
+                        Locations
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#movements" class="nav-link" data-page="movements">
+                        <i class="fas fa-exchange-alt"></i>
+                        Movements
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reports" class="nav-link" data-page="reports">
+                        <i class="fas fa-chart-bar"></i>
+                        Reports
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Warehouse Background" class="hero-image">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">Professional Inventory Management</h1>
+            <p class="hero-subtitle">Streamline your warehouse operations with our comprehensive inventory tracking system</p>
+            <button class="hero-cta" onclick="showPage('products')">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Dashboard Page -->
+        <section id="dashboard-page" class="page active">
+            <div class="page-header">
+                <h2 class="page-title">Dashboard Overview</h2>
+                <p class="page-subtitle">Monitor your inventory at a glance</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon products">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-products">0</h3>
+                        <p>Total Products</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon locations">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-locations">0</h3>
+                        <p>Warehouse Locations</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon movements">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-movements">0</h3>
+                        <p>Total Movements</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon value">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-value">$0</h3>
+                        <p>Inventory Value</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-charts">
+                <div class="chart-card">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="recent-activity">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>Welcome to InventoryPro!</p>
+                                <span>Start by adding products and locations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>Quick Actions</h3>
+                    <div class="quick-actions">
+                        <button class="quick-action-btn" onclick="showPage('products')">
+                            <i class="fas fa-plus"></i>
+                            Add Product
+                        </button>
+                        <button class="quick-action-btn" onclick="showPage('locations')">
+                            <i class="fas fa-warehouse"></i>
+                            Add Location
+                        </button>
+                        <button class="quick-action-btn" onclick="showPage('movements')">
+                            <i class="fas fa-exchange-alt"></i>
+                            Record Movement
+                        </button>
+                        <button class="quick-action-btn" onclick="showPage('reports')">
+                            <i class="fas fa-chart-bar"></i>
+                            View Reports
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Page -->
+        <section id="products-page" class="page">
+            <div class="page-header">
+                <h2 class="page-title">Product Management</h2>
+                <p class="page-subtitle">Manage your product catalog</p>
+                <button class="add-btn" onclick="showAddProductForm()">
+                    <i class="fas fa-plus"></i>
+                    Add New Product
+                </button>
+            </div>
+
+            <!-- Add Product Form -->
+            <div class="form-container" id="add-product-form" style="display: none;">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h3>Add New Product</h3>
+                        <button class="close-btn" onclick="hideAddProductForm()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="product-form">
+                        <div class="form-group">
+                            <label for="product-id">Product ID</label>
+                            <input type="text" id="product-id" name="product-id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-name">Product Name</label>
+                            <input type="text" id="product-name" name="product-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-description">Description</label>
+                            <textarea id="product-description" name="product-description" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="hideAddProductForm()">Cancel</button>
+                            <button type="submit" class="btn-primary">Add Product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Products Table -->
+            <div class="table-container">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Products List</h3>
+                        <div class="table-actions">
+                            <input type="text" id="product-search" placeholder="Search products..." class="search-input">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Total Stock</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-tbody">
+                                <tr class="empty-state">
+                                    <td colspan="5">
+                                        <div class="empty-message">
+                                            <i class="fas fa-box"></i>
+                                            <p>No products found. Add your first product to get started!</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Locations Page -->
+        <section id="locations-page" class="page">
+            <div class="page-header">
+                <h2 class="page-title">Location Management</h2>
+                <p class="page-subtitle">Manage your warehouse locations</p>
+                <button class="add-btn" onclick="showAddLocationForm()">
+                    <i class="fas fa-plus"></i>
+                    Add New Location
+                </button>
+            </div>
+
+            <!-- Add Location Form -->
+            <div class="form-container" id="add-location-form" style="display: none;">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h3>Add New Location</h3>
+                        <button class="close-btn" onclick="hideAddLocationForm()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="location-form">
+                        <div class="form-group">
+                            <label for="location-id">Location ID</label>
+                            <input type="text" id="location-id" name="location-id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location-name">Location Name</label>
+                            <input type="text" id="location-name" name="location-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="location-address">Address</label>
+                            <textarea id="location-address" name="location-address" rows="3"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="hideAddLocationForm()">Cancel</button>
+                            <button type="submit" class="btn-primary">Add Location</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Locations Grid -->
+            <div class="locations-grid" id="locations-grid">
+                <div class="empty-state-large">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80" alt="Empty warehouse">
+                    <h3>No Locations Yet</h3>
+                    <p>Add your first warehouse location to start tracking inventory</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Movements Page -->
+        <section id="movements-page" class="page">
+            <div class="page-header">
+                <h2 class="page-title">Product Movements</h2>
+                <p class="page-subtitle">Track product transfers and stock changes</p>
+                <button class="add-btn" onclick="showAddMovementForm()">
+                    <i class="fas fa-plus"></i>
+                    Record Movement
+                </button>
+            </div>
+
+            <!-- Add Movement Form -->
+            <div class="form-container" id="add-movement-form" style="display: none;">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h3>Record Product Movement</h3>
+                        <button class="close-btn" onclick="hideAddMovementForm()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <form id="movement-form">
+                        <div class="form-group">
+                            <label for="movement-product">Product</label>
+                            <select id="movement-product" name="movement-product" required>
+                                <option value="">Select a product...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="movement-from">From Location</label>
+                            <select id="movement-from" name="movement-from">
+                                <option value="">Select source location (or leave blank for new stock)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="movement-to">To Location</label>
+                            <select id="movement-to" name="movement-to">
+                                <option value="">Select destination location (or leave blank for removal)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="movement-qty">Quantity</label>
+                            <input type="number" id="movement-qty" name="movement-qty" min="1" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="hideAddMovementForm()">Cancel</button>
+                            <button type="submit" class="btn-primary">Record Movement</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Movements Table -->
+            <div class="table-container">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Movement History</h3>
+                        <div class="table-actions">
+                            <input type="text" id="movement-search" placeholder="Search movements..." class="search-input">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Product</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Quantity</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody id="movements-tbody">
+                                <tr class="empty-state">
+                                    <td colspan="7">
+                                        <div class="empty-message">
+                                            <i class="fas fa-exchange-alt"></i>
+                                            <p>No movements recorded yet. Record your first product movement!</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Page -->
+        <section id="reports-page" class="page">
+            <div class="page-header">
+                <h2 class="page-title">Inventory Reports</h2>
+                <p class="page-subtitle">Current stock levels and analytics</p>
+                <button class="add-btn" onclick="generateReport()">
+                    <i class="fas fa-sync"></i>
+                    Refresh Report
+                </button>
+            </div>
+
+            <!-- Report Summary Cards -->
+            <div class="report-summary">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="report-total-items">0</h3>
+                        <p>Total Items in Stock</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="report-low-stock">0</h3>
+                        <p>Low Stock Alerts</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3 id="report-locations-active">0</h3>
+                        <p>Active Locations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stock Report Table -->
+            <div class="table-container">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Current Stock Levels</h3>
+                        <div class="table-actions">
+                            <input type="text" id="report-search" placeholder="Search inventory..." class="search-input">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Location</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="report-tbody">
+                                <tr class="empty-state">
+                                    <td colspan="4">
+                                        <div class="empty-message">
+                                            <i class="fas fa-chart-bar"></i>
+                                            <p>No inventory data available. Add products and record movements to generate reports!</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 InventoryPro. Professional inventory management made simple.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
